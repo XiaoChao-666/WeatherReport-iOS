@@ -1,0 +1,6 @@
+platform :ios, '10.0'
+target 'pro1' do
+pod 'AFNetworking', '~>3.1.0'
+pod 'Masonry', '~>1.0.1'
+pod 'LookinServer', :configurations => ['Debug']
+end
