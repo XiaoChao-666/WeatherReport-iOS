@@ -28,15 +28,6 @@
     TemViewController *oneVc = [[TemViewController alloc]init];
     AirViewController *twoVc = [[AirViewController alloc]init];
 
-    //为两个视图控制器添加导航栏控制器
-
-//    UINavigationController *navOne = [[UINavigationController alloc]initWithRootViewController:oneVc];
-//    UINavigationController *navTwo = [[UINavigationController alloc]initWithRootViewController:twoVc];
-
-    //设置控制器文字
-    oneVc.title = @"天气预报";
-    twoVc.title = @"空气质量";
-
     //设置控制器图片(使用imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal,不被系统渲染成蓝色)
 
     oneVc.tabBarItem.image = [[UIImage imageNamed:@"1"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];

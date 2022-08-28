@@ -32,6 +32,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIButton *pickerDoneBtn;
 @property (nonatomic, strong) UIButton *pickerCancelBtn;
 
+@property (nonatomic, strong) UILabel *firstTip;
+@property (nonatomic, strong) UILabel *firstSubTip;
+@property (nonatomic, strong) UILabel *secondTip;
+@property (nonatomic, strong) UILabel *secondSubTip;
+
 @property (nonatomic, strong) id<WeatherReportBtn> delegate;
 
 @end

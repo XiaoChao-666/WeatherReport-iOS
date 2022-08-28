@@ -3,4 +3,6 @@ target 'pro1' do
 pod 'AFNetworking', '~>3.1.0'
 pod 'Masonry', '~>1.0.1'
 pod 'LookinServer', :configurations => ['Debug']
+pod 'Mantle', '~> 2.0.4'
+pod ‘YYKit’ , '~>1.0.9'
 end

@@ -37,6 +37,12 @@
     [self addSubview:self.pickerView];
     [self addSubview:self.pickerDoneBtn];
     [self addSubview:self.pickerCancelBtn];
+    
+    [self addSubview:self.firstTip];
+    [self addSubview:self.firstSubTip];
+    [self addSubview:self.secondTip];
+    [self addSubview:self.secondSubTip];
+    
 }
 - (void)p_addPositionConstraints
 {
@@ -94,6 +100,26 @@
         make.right.equalTo(self).offset(-10);
     }];
     
+    [self.firstTip mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.hintLabel).offset(150);
+        make.centerX.equalTo(self);
+    }];
+    
+    [self.firstSubTip mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.firstTip).offset(-50);
+        make.centerX.equalTo(self);
+    }];
+    
+    [self.secondTip mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.firstTip).offset(150);
+        make.centerX.equalTo(self);
+    }];
+    
+    [self.secondSubTip mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.secondTip).offset(-50);
+        make.centerX.equalTo(self);
+    }];
+    
 }
 
 - (UITableView*)tableView{
@@ -103,7 +129,6 @@
 //        _tableView.delegate = self;
 //        _tableView.dataSource = self;
         _tableView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.1];
-        [self addSubview:_tableView];
     }
     return _tableView;
 }
@@ -114,13 +139,12 @@
         layout.itemSize = CGSizeMake(50, 150);
         layout.minimumLineSpacing = 10;
         layout.minimumInteritemSpacing = 15;
-//        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero  collectionViewLayout:layout];
         [_collectionView registerClass:[WeatherReportCollectionViewCell class]  forCellWithReuseIdentifier:@"WeatherReportCollectionViewCell" ];
 //        self.collectionView.delegate = self;
 //        self.collectionView.dataSource = self;
         _collectionView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0];
-        [self addSubview:_collectionView];
     }
     return _collectionView;
 }
@@ -130,7 +154,6 @@
         _topLabel = [[UILabel alloc] init];
         _topLabel.text = @"北京";
         _topLabel.font = [UIFont systemFontOfSize:40];
-        [self addSubview:_topLabel];
     }
     return _topLabel;
 }
@@ -140,7 +163,6 @@
         _majorLabel = [[UILabel alloc] init];
         _majorLabel.text = @"0";
         _majorLabel.font = [UIFont systemFontOfSize:50];
-        [self addSubview:_majorLabel];
     }
     return _majorLabel;
 }
@@ -150,7 +172,6 @@
         _subLabel = [[UILabel alloc] init];
         _subLabel.text = @"晴";
         _subLabel.font = [UIFont systemFontOfSize:20];
-        [self addSubview:_subLabel];
     }
     return _subLabel;
 }
@@ -160,7 +181,7 @@
         _hintLabel = [[UILabel alloc] init];
         _hintLabel.text = @"最高气温：0度 最低气温：0度";
         _hintLabel.font = [UIFont systemFontOfSize:15];
-        [self addSubview:_hintLabel];
+        _hintLabel.lineBreakMode = NSLineBreakByWordWrapping;
     }
     return _hintLabel;
 }
@@ -171,7 +192,6 @@
         [_changeCityBtn setImage:[UIImage imageNamed:@"3"] forState:UIControlStateNormal];
         _changeCityBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
         [_changeCityBtn addTarget:self action:@selector(p_changeCityBtnclick:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_changeCityBtn];
     }
     return _changeCityBtn;
 }
@@ -180,7 +200,6 @@
     if(!_pickerView){
         _pickerView = [[UIPickerView alloc] init];
         _pickerView.backgroundColor = [UIColor colorWithWhite:3.f alpha:0.6];
-        [self addSubview:_pickerView];
         [self bringSubviewToFront:_pickerView];
     }
     return _pickerView;
@@ -192,7 +211,6 @@
         [_pickerDoneBtn setTitle:@"done" forState:UIControlStateNormal];
         [_pickerDoneBtn setBackgroundColor: [UIColor blueColor]];
         [_pickerDoneBtn addTarget:self action:@selector(p_pickerDone:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_pickerDoneBtn];
     }
     return _pickerDoneBtn;
 }
@@ -203,9 +221,47 @@
         [_pickerCancelBtn setTitle:@"cancel" forState:UIControlStateNormal];
         [_pickerCancelBtn setBackgroundColor: [UIColor blueColor]];
         [_pickerCancelBtn addTarget:self action:@selector(p_pickerCancel:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_pickerCancelBtn];
     }
     return _pickerCancelBtn;
+}
+
+- (UILabel*)firstTip{
+    if(!_firstTip){
+        _firstTip = [[UILabel alloc] init];
+        _firstTip.text = @"3-4级转<3级";
+        _firstTip.textColor = [UIColor whiteColor];
+        _firstTip.font = [UIFont systemFontOfSize:50];
+    }
+    return _firstTip;
+}
+
+- (UILabel*)firstSubTip{
+    if(!_firstSubTip){
+        _firstSubTip = [[UILabel alloc] init];
+        _firstSubTip.text = @"风速";
+        _firstSubTip.font = [UIFont systemFontOfSize:30];
+    }
+    return _firstSubTip;
+}
+
+
+- (UILabel*)secondTip{
+    if(!_secondTip){
+        _secondTip = [[UILabel alloc] init];
+        _secondTip.text = @"多云转小雨";
+        _secondTip.textColor = [UIColor whiteColor];
+        _secondTip.font = [UIFont systemFontOfSize:50];
+    }
+    return _secondTip;
+}
+
+- (UILabel*)secondSubTip{
+    if(!_secondSubTip){
+        _secondSubTip = [[UILabel alloc] init];
+        _secondSubTip.text = @"天气";
+        _secondSubTip.font = [UIFont systemFontOfSize:30];
+    }
+    return _secondSubTip;
 }
 
 
